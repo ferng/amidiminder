@@ -29,12 +29,12 @@ ALSA utility to keep your MIDI devices connected
 ## Building
 
 Prerequisites:
-  * g++, 6 or later
+  *  g++-10 compiler
   * make
   * libasound2-dev
 
 ```sh
-sudo apt install g++ make libasound2-dev
+sudo apt install g++-10 make libasound2-dev
 ```
 
 Clone this repo and run `make`:
@@ -42,7 +42,11 @@ Clone this repo and run `make`:
 ```sh
 git clone https://github.com/mzero/amidiminder.git
 cd amidiminder
-make
+
+vi debian/control
+Architecture: arm64
+
+make CXX=g++-10 CC=g++-10
 ```
 
 Outputs:
@@ -62,46 +66,3 @@ sudo dpkg -i build/amidiminder.deb
 
 That's it. — It's installed. — It's running — You're done!
 
-## Configuration
-
-`amidiminder` reads a rules file from `/etc/amidiminder.rules`. If you edit
-that file, you can first check it is legal:
-
-```sh
-amidiminder -C  # checks the rules and then quits
-```
-
-Then, restart the service:
-
-```sh
-sudo systemctl restart amidiminder
-```
-
-### Rules Format
-
-Example:
-```
-nanoKEY2 --> Circuit
-  # connects the first port for each device as shown
-
-bicycle <-- Launchpad Pro MK3
-bicycle <-- Launchpad Pro MK3:2
-bicycle:synths --> Circuit
-  # the port direction can go which ever way is convienent for you
-  # ports can be specified by number or by name
-```
-
----
-
-
-## Credits & Thanks
-
-### Related work
-
-[amidiauto](https://github.com/BlokasLabs/amidiauto) by Blokas Labs.
-
-### Open source code used
-
-https://github.com/CLIUtils/CLI11
-CLI11 1.8 Copyright (c) 2017-2019 University of Cincinnati, developed by Henry
-Schreiner under NSF AWARD 1414736. All rights reserved.
