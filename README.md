@@ -32,12 +32,13 @@ Prerequisites:
   *  g++-10 compiler
   * make
   * libasound2-dev
+  * fakeroot
 
 ```sh
-sudo apt install g++-10 make libasound2-dev
+sudo apt install g++-10 make libasound2-dev fakeroot
 ```
 
-Clone this repo and run `make`:
+Clone this repo and run:
 
 ```sh
 git clone https://github.com/mzero/amidiminder.git
